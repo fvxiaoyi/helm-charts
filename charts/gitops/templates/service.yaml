@@ -1,15 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "gitops.fullname" . }}
-  labels:
-    {{- include "gitops.labels" . | nindent 4 }}
+  name: order-service
 spec:
-  type: {{ .Values.service.type }}
+  type: NodePort
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
+    - name: port
+      port: 8080
+      nodePort: 30000
+    - name: metrics
+      port: 9464
+      nodePort: 30001
   selector:
-    {{- include "gitops.selectorLabels" . | nindent 4 }}
+    app: order-service
+    component: java
