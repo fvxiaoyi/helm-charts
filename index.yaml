@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  gitops:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-04-28T07:30:28.29219165Z"
+    description: A Helm chart for Kubernetes
+    digest: ffcd72f966145c894f1304a961cb2a968ef77a9a23a8fdd56dd3a568dc047e87
+    name: gitops
+    type: application
+    urls:
+    - https://github.com/fvxiaoyi/helm-charts/releases/download/gitops-0.1.4/gitops-0.1.4.tgz
+    version: 0.1.4
+generated: "2022-04-28T07:30:28.29222285Z"
