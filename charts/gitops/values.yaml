@@ -8,3 +8,4 @@ agent:
     tag: 12
   otel:
     tag: 1
+
