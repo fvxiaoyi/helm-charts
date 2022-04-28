@@ -1,59 +1,61 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: order-service-deploy
+  name: {{ include "gitops.fullname" . }}
+  labels:
+    {{- include "gitops.labels" . | nindent 4 }}
 spec:
-  replicas: 1
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
   selector:
     matchLabels:
-      app: order-service
-      component: java
+      {{- include "gitops.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      labels:
-        app: order-service
-        component: java
+      {{- with .Values.podAnnotations }}
       annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "9464"
-        prometheus.io/path: "/metrics"
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "gitops.selectorLabels" . | nindent 8 }}
     spec:
-      initContainers:
-        - name: prometheus-agent
-          image: ebinsu/prometheus-agent:12
-          imagePullPolicy: IfNotPresent
-          volumeMounts:
-            - name: prometheus-javaagent
-              mountPath: /prometheus-javaagent
-        - name: otel-javaagent
-          image: ebinsu/agent:1
-          imagePullPolicy: IfNotPresent
-          volumeMounts:
-            - name: otel-javaagent
-              mountPath: /otel-javaagent
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "gitops.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - image: "ebinsu/order-service:{{ .Values.image.tag}}"
-          imagePullPolicy: IfNotPresent
-          name: order-service
-          env:
-            - name: JAVA_OPTS
-              value: "-javaagent:/otel-javaagent/opentelemetry-javaagent.jar -javaagent:/prometheus-javaagent/jmx_prometheus_javaagent.jar=9464:/prometheus-javaagent/config.yaml"
-            - name: OTEL_EXPORTER_OTLP_ENDPOINT
-              value: "http://opentelemetry-collector:4317"
-            - name: OTEL_RESOURCE_ATTRIBUTES
-              value: "service.name=order-service,service.namespace=defalut"
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 8080
-            - name: metrics
-              containerPort: 9464
-          volumeMounts:
-            - name: otel-javaagent
-              mountPath: /otel-javaagent
-            - name: prometheus-javaagent
-              mountPath: /prometheus-javaagent
-      volumes:
-        - emptyDir: { }
-          name: otel-javaagent
-        - emptyDir: { }
-          name: prometheus-javaagent
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
