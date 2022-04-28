@@ -9,13 +9,15 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - name: test
-        run: |
-          echo "$GITHUB_ACTOR"
       - name: Checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+
+      - name: test
+        run: |
+          echo 1
+          echo "$GITHUB_ACTOR"
 
       - name: Configure Git
         run: |
