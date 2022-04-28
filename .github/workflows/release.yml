@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: test
         run: |
-          echo ${{ $GITHUB_ACTOR }}
+          echo "${{ $GITHUB_ACTOR }}"
       - name: Checkout
         uses: actions/checkout@v2
         with:
