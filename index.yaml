@@ -21,4 +21,15 @@ entries:
     urls:
     - https://github.com/fvxiaoyi/helm-charts/releases/download/gitops-0.1.4/gitops-0.1.4.tgz
     version: 0.1.4
-generated: "2022-04-28T07:44:38.914069756Z"
+  order-service:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-04-29T09:46:49.81605819Z"
+    description: A Helm chart for Kubernetes
+    digest: 7063cb44f8b91409d8ab17490105adfdcbfd64463cb82a9799c6a478515c1939
+    name: order-service
+    type: application
+    urls:
+    - https://github.com/fvxiaoyi/helm-charts/releases/download/order-service-0.1.0/order-service-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-04-29T09:46:49.81606699Z"
