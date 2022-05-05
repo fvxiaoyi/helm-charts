@@ -24,6 +24,16 @@ entries:
   order-service:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-05-05T07:08:14.112535051Z"
+    description: A Helm chart for Kubernetes
+    digest: 92ffc76844a79524683ea2aa79f57b9bb95a58d42d076896a2fe7b4bd77b0303
+    name: order-service
+    type: application
+    urls:
+    - https://github.com/fvxiaoyi/helm-charts/releases/download/order-service-0.2.2/order-service-0.2.2.tgz
+    version: 0.2.2
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-05-05T06:54:16.530839511Z"
     description: A Helm chart for Kubernetes
     digest: caf65022d616645bf6edb7db9fa8ba94fc49c17918f7159f98241b2b833db38d
@@ -132,4 +142,4 @@ entries:
     urls:
     - https://github.com/fvxiaoyi/helm-charts/releases/download/order-service-0.1.0/order-service-0.1.0.tgz
     version: 0.1.0
-generated: "2022-05-05T06:54:16.530948418Z"
+generated: "2022-05-05T07:08:14.112673756Z"
