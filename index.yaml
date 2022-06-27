@@ -175,6 +175,16 @@ entries:
   payment-service:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-06-27T04:01:10.489763339Z"
+    description: A Helm chart for Kubernetes
+    digest: dd38e9dc6905005a1fa6dde1594cd953de4abe2036af4153ef9a988d7ae61929
+    name: payment-service
+    type: application
+    urls:
+    - https://github.com/fvxiaoyi/helm-charts/releases/download/payment-service-0.1.7/payment-service-0.1.7.tgz
+    version: 0.1.7
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-06-27T03:57:12.920826422Z"
     description: A Helm chart for Kubernetes
     digest: e5058a22894169af7d20d20fe8e8519bc58573aa24a5a70c4937d5c8d1232207
@@ -223,4 +233,4 @@ entries:
     urls:
     - https://github.com/fvxiaoyi/helm-charts/releases/download/payment-service-0.1.1/payment-service-0.1.1.tgz
     version: 0.1.1
-generated: "2022-06-27T03:57:12.920904423Z"
+generated: "2022-06-27T04:01:10.489945742Z"
