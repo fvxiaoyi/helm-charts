@@ -3,12 +3,12 @@ kind: Deployment
 metadata:
   name: {{ .Values.fullname }}
   labels:
-    {{- include .Values.labels . | nindent 4 }}
+    {{- include "payment-service.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include .Values.selectorLabels . | nindent 6 }}
+      {{- include "payment-service.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -16,7 +16,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include .Values.selectorLabels . | nindent 8 }}
+        {{- include "payment-service.selectorLabels" . | nindent 8 }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
