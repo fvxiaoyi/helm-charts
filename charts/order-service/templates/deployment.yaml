@@ -42,6 +42,9 @@ spec:
               value: "http://opentelemetry-collector:4317"
             - name: OTEL_RESOURCE_ATTRIBUTES
               value: "service.name=order-service,service.namespace=defalut"
+          {{- if .Values.overrideSecretName }}
+          args: ["--spring.config.location=file:/config/"]
+          {{- end }}
           ports:
             - name: http
               containerPort: 8080
@@ -52,8 +55,18 @@ spec:
               mountPath: /otel-javaagent
             - name: prometheus-javaagent
               mountPath: /prometheus-javaagent
+            {{- if .Values.overrideSecretName }}
+            - name: override-properties
+              mountPath: "/config"
+              readOnly: true
+            {{- end }}
       volumes:
         - emptyDir: { }
           name: otel-javaagent
         - emptyDir: { }
           name: prometheus-javaagent
+        {{- if .Values.overrideSecretName }}
+        - name: override-properties
+          secret:
+            secretName: {{ .Values.overrideSecretName }}
+        {{- end }}
