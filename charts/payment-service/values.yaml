@@ -12,16 +12,17 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "17"
 
-podAnnotations: {
+podAnnotations:
   prometheus.io/scrape: "true"
-    prometheus.io/port: "9464"
-    prometheus.io/path: "/metrics"
-}
+  prometheus.io/port: "9464"
+  prometheus.io/path: "/metrics"
 
 service:
   type: ClusterIP
   port: 80
 
 selectorLabels:
-  app: order-service
+  app: payment-service
   component: java
+
+containerPort: 8080
