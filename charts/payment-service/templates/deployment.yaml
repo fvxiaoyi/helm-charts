@@ -45,7 +45,7 @@ spec:
           args: [
             {{- if .Values.additionalPropertiesName }}
             "--spring.config.additional-location=optional:/config/{{ .Values.additionalPropertiesName }}"
-            {{- else }}
+            {{ else }}
             "--spring.config.additional-location=optional:file:/config/"
             {{- end }}
           ]
