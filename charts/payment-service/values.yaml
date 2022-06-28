@@ -26,3 +26,6 @@ selectorLabels:
   component: java
 
 containerPort: 8080
+
+additionalSecretName: payment-service
+additionalPropertiesName: application-addition.properties
