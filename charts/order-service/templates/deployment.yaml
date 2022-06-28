@@ -69,8 +69,8 @@ spec:
           name: otel-javaagent
         - emptyDir: { }
           name: prometheus-javaagent
-        {{- if .Values.overrideSecretName }}
+        {{- if .Values.additionalSecretName }}
         - name: additional-properties
           secret:
-            secretName: {{ .Values.overrideSecretName }}
+            secretName: {{ .Values.additionalSecretName }}
         {{- end }}
