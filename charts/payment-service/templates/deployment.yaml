@@ -55,8 +55,6 @@ spec:
               protocol: TCP
             - name: metrics
               containerPort: 9464
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             - name: otel-javaagent
               mountPath: /otel-javaagent
