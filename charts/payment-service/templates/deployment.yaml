@@ -43,11 +43,11 @@ spec:
             - name: OTEL_RESOURCE_ATTRIBUTES
               value: "service.name={{ .Chart.Name }},service.namespace={{ .Release.Namespace }}"
           args: [
-            { { - if .Values.additionalPropertiesName } }
+            {{- if .Values.additionalPropertiesName }}
             "--spring.config.additional-location=optional:/config/{{ .Values.additionalPropertiesName }}"
-            { { else } }
+            {{- else }}
             "--spring.config.additional-location=optional:file:/config/"
-            { { - end } }
+            {{- end }}
           ]
           ports:
             - name: http
@@ -60,18 +60,18 @@ spec:
               mountPath: /otel-javaagent
             - name: prometheus-javaagent
               mountPath: /prometheus-javaagent
-            { { - if .Values.additionalSecretName } }
+            {{ - if .Values.additionalSecretName }}
             - name: additional-properties
               mountPath: "/config"
               readOnly: true
-            { { - end } }
+            {{ - end }}
       volumes:
         - emptyDir: { }
           name: otel-javaagent
         - emptyDir: { }
           name: prometheus-javaagent
-        { { - if .Values.additionalSecretName } }
+        {{- if .Values.additionalSecretName }}
         - name: additional-properties
           secret:
-            secretName: { { .Values.additionalSecretName } }
-        { { - end } }
+            secretName: {{ .Values.additionalSecretName }}
+        {{- end }}
