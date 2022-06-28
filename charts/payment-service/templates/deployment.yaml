@@ -60,11 +60,11 @@ spec:
               mountPath: /otel-javaagent
             - name: prometheus-javaagent
               mountPath: /prometheus-javaagent
-            {{ - if .Values.additionalSecretName }}
+            {{- if .Values.additionalSecretName }}
             - name: additional-properties
               mountPath: "/config"
               readOnly: true
-            {{ - end }}
+            {{- end }}
       volumes:
         - emptyDir: { }
           name: otel-javaagent
