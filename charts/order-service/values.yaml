@@ -13,4 +13,5 @@ agent:
   otel:
     tag: 1
 
-overrideSecretName: order-service
+additionalSecretName: order-service
+additionalPropertiesName: application-addition.properties
