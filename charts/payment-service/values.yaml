@@ -27,5 +27,7 @@ selectorLabels:
 
 containerPort: 8080
 
+otlpEndpoint: http://opentelemetry-collector:4317
+
 additionalSecretName: payment-service
 additionalPropertiesName: application-addition.properties
