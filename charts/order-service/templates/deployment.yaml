@@ -42,6 +42,8 @@ spec:
               value: "{{ .Values.otlpEndpoint }}"
             - name: OTEL_RESOURCE_ATTRIBUTES
               value: "service.name=order-service,service.namespace=defalut"
+            - name: OTEL_INSTRUMENTATION_SPRING-WEBMVC_ENABLED
+              value: false
           args: [
           {{- if .Values.additionalPropertiesName }}
           "--spring.config.additional-location=optional:/config/{{ .Values.additionalPropertiesName }}"
