@@ -26,7 +26,7 @@ spec:
             - name: prometheus-javaagent
               mountPath: /prometheus-javaagent
         - name: otel-javaagent
-          image: ebinsu/agent:1
+          image: "ebinsu/agent:{{ .Values.agentTag }}"
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: otel-javaagent

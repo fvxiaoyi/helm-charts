@@ -17,3 +17,4 @@ additionalSecretName: order-service
 additionalPropertiesName: application-addition.properties
 
 otlpEndpoint: http://opentelemetry-collector:4317
+agentTag: 2
